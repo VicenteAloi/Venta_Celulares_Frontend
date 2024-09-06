@@ -1,0 +1,21 @@
+#envio{
+    background-color: #69B190;
+    color: white;
+    border-radius: 15px;
+    padding: 8px 0;
+}
+
+#sucursal{
+    background-color: #61A0FD;
+    color: white;
+    border-radius: 15px;
+    padding: 8px 0;
+}
+
+#sucursales label{
+    display: block;
+    font-size: 25px;
+    margin: 15px 0 10px 0;
+}
+
+
