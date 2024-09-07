@@ -24,6 +24,9 @@ export class ProducListComponent implements OnInit{
   disabledBack: string='';
   listProducts: product[] = [];
   object!:responseProductPaginate;
+  active1:string='';
+  active2:string='';
+  active0:string='';
 
   constructor(private productoS: ProductService, private modalService: BsModalService) { }
 
@@ -67,6 +70,9 @@ export class ProducListComponent implements OnInit{
           this.listProducts.push(list[i]) //Agregar el producto con stock >0 al arreglo
         }
       }
+      this.active0='active';
+      this.active1='';
+      this.active2='';
     }, 500);
   }
 
@@ -93,7 +99,7 @@ export class ProducListComponent implements OnInit{
       }
       this.totalPages = pagesArray
       
-      if(page == this.totalPages.length-1){
+      if(page == this.totalPages.length){
         this.disabledNext = 'disabled'
       }
       if(page == 0){
@@ -103,6 +109,20 @@ export class ProducListComponent implements OnInit{
         if (products[i].stock > 0) {
           this.listProducts.push(products[i]) //Agregar el producto con stock >0 al arreglo
         }
+      }
+      switch (page) {
+        case 0:
+          this.active0='';
+          this.active1='active';
+          this.active2='';
+          break;
+        case 1:
+          this.active0='';
+          this.active1='';
+          this.active2='active';
+          break;
+        default:
+          break;
       }
     }, 500); 
     console.log(this.totalPages)   

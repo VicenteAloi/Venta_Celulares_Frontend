@@ -4,12 +4,10 @@
 </head>
 
 <div class="container">
-  <h3 *ngIf="page!=-1" class="text-center px-5 my-5" style="text-decoration:overline;">
-    Productos - Pagina {{page+1}}
+  <h3 class="text-center px-5 my-5" style="text-decoration:overline;">
+    Productos 
   </h3>
-  <h3 *ngIf="page==-1" class="text-center px-5 my-5" style="text-decoration:overline;">
-    Productos - Todos
-  </h3>
+
 
 
  <div class="row">
@@ -23,6 +21,7 @@
               <th data-titulo="Modelo">Modelo</th>
               <th data-titulo="Stock">stock</th>
               <th data-titulo="Precio">Precio</th>
+              <th data-titulo="Creación">Creación</th>
               <th data-titulo="Acciones">Acciones</th>
 
             </tr>
@@ -34,6 +33,7 @@
               <td data-titulo="Modelo: ">{{products.model}}</td>
               <td data-titulo="Stock: ">{{products.stock}}</td>
               <td data-titulo="Precio: ">{{products.price}}</td>
+              <td data-titulo="Creación: ">{{products.createdAt | date:'fullDate'}}</td>
               <td>
                 <div class="text-center">
                   <div class="btn-group">
@@ -70,18 +70,17 @@
           <ul class="pagination">
             <li class="page-item">
               <a class="page-link {{disabledBack}}" aria-label="Previous" (click)="getProductByPage(page-1)">
-                <span aria-hidden="true">Back</span>
+                <span aria-hidden="true"><<</span>
               </a>
             </li>
-              <li  class="page-item {{active}}"><a class="page-link" (click)="getProductByPage(0)">1</a></li>
-              <li class="page-item"><a class="page-link" (click)="getProductByPage(1)">2</a></li>
-              <li class="page-item"><a class="page-link" (click)="getProductByPage(2)">3</a></li>
+              <li class="page-item {{active1}}"><a class="page-link" (click)="getProductByPage(0)">1</a></li>
+              <li class="page-item {{active2}}"><a class="page-link" (click)="getProductByPage(1)">2</a></li>
             <li class="page-item">
               <a  class="page-link {{disabledNext}}" aria-label="Next">
-                <span aria-hidden="true" (click)="getProductByPage(page+1)">Next</span>
+                <span aria-hidden="true" (click)="getProductByPage(page+1)">>></span>
               </a>
             </li>
-            <li class="page-item px-5"><a class="page-link" (click)="getProducts()">Mostrar todos</a> </li>
+            <li class="page-item px-5 {{active0}}"><a class="page-link" (click)="getProducts()">Todos</a> </li>
           </ul>
         </nav>
       </div>

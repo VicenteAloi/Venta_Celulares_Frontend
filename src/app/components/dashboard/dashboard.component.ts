@@ -30,10 +30,11 @@ export class DashboardComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getProductByPage(this.page);
+    
     this.productService.getProductsByPageObs().subscribe((data) => {
-      this.object = data
+      this.object = data  
     });
+    this.getProductByPage(this.page);
     this.disabledNext = false;
   }
 
@@ -70,7 +71,7 @@ export class DashboardComponent implements OnInit {
   }
 
  
-  getProductByPage(page:number){
+  async getProductByPage(page:number){
     this.page=page
 
     this.listProducts = [];

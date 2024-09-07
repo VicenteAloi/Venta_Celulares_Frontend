@@ -2,3 +2,17 @@
   background-color: rgba(0, 0, 53, 0.849);
   color: white;
 }
+
+@media (max-width: 30em){
+  *{
+   font-size: small; 
+  }
+
+ul {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid grey;
+    margin-bottom: 1em;
+}
+
+}

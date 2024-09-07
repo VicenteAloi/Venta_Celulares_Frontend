@@ -32,6 +32,7 @@ export class PurchaseComponent implements OnInit {
   user?: user;
   endCollapsed=true;
   selectedSucursal:number=0;
+  registered:boolean=false;
   
   constructor(
     private domicileService: DomicileService, 
@@ -68,7 +69,8 @@ export class PurchaseComponent implements OnInit {
       this.data = data;
       this.idDomicile = this.data.id; 
       this.createSalesWithProductsCart();
-    })
+    });
+    this.registered = !this.registered
   }
 
 

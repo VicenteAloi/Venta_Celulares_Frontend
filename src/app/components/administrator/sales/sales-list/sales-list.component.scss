@@ -8,8 +8,29 @@
   width: 30%;
 }
 
+
 .form-control {
   text-align: center;
   text-transform: uppercase;
   font-style: oblique;
+}
+
+@media (max-width: 30em){
+  table{
+      width: 100%;
+  }
+  table tr{
+      display: flex;
+      flex-direction: column;
+      border: 1px solid grey;
+      margin-bottom: 1em;
+  }
+  table tbody{
+      margin-left: 25px;
+  }
+
+  table thead{
+      display: none;
+  }
+  
 }

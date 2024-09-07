@@ -23,6 +23,9 @@ export class AdministratorsListComponent {
   currentPage: number = 1;
   page:number=0;
   totalPages:number[] = [];
+  active1:string ='';
+  active2:string ='';
+  active0:string='';
 
   constructor(
     private adminService: AdministratorsService, 
@@ -33,7 +36,8 @@ export class AdministratorsListComponent {
   }
 
   ngOnInit(): void {
-   this.getAdministrators(this.page)
+   this.getAdministrators(this.page);
+   console.log(this.totalPages);
   }
   openModal2(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
@@ -60,16 +64,13 @@ export class AdministratorsListComponent {
 
 
 
-  getAdministrators(page:number){
+  async getAdministrators(page:number){
     this.page=page
     let object: responseAdminPaginate;
     this.adminList = [];
     this.adminService.getAdministrators(this.page)
     .subscribe((data: responseAdminPaginate) => {
       object = data
-    });
-
-    setTimeout(() => {
       const {total, administrators} = object
       let pagesArray:number[] = [];
       let i;
@@ -83,7 +84,22 @@ export class AdministratorsListComponent {
       for (let i = 0; i < administrators.length; i++) {
           this.adminList.push(administrators[i]) //Agregar el producto con stock >0 al arreglo
         }
-    }, 500);
+    });
+     switch (page) {
+          case 0:
+            this.active1 ='active';
+            this.active2='';
+            this.active0='';
+            break;
+          case 1:
+            this.active1 ='';
+            this.active2='active';
+            this.active0='';
+            break
+          default:
+            break;
+        }
+   
   }
 
   getAllAdministrators(){
@@ -93,7 +109,10 @@ export class AdministratorsListComponent {
         this.adminList = data
       },
       error:(error)=> this.toastr.error(error)
-    })
+    });
+    this.active1 ='';
+    this.active2='';
+    this.active0='active';
   }
 
 }

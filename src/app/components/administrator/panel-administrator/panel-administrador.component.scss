@@ -6,3 +6,9 @@
   min-height: 100%;
   min-width: 100%;
 }
+
+@media (max-width: 30em){
+  *{
+   font-size: small; 
+  }
+}

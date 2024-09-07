@@ -17,13 +17,13 @@
           [attr.aria-expanded]="collapsed" aria-controls="collapseBasic">Retiro en Sucursal
             </button>
     </div>
-    <div class="text-start m-5 px-5">
+    <div class="text-start my-2 px-5">
         <!-- Envío a Domicilio -->
         <div id="collapseBasic" [collapse]="!collapsed" [isAnimated]="true">
             <h2 class="text-center my-3" id="envio">Envío a Domicilio</h2>
-            <div class="well well-lg card card-block card-header">
+            <div class="well well-lg card card-block card-header mb-5">
                 
-                <form [formGroup]="formGroup!" (ngSubmit)="setDomicile()">
+                <form [formGroup]="formGroup!" class="mb-5" (ngSubmit)="setDomicile()">
                     <div class="mb-3">
                         <label for="codPos">Codigo Postal</label>
                         <input id="codPos" type="text" placeholder="Codigo Postal" class="form-control"
@@ -40,22 +40,22 @@
                         formControlName="numero">
                     </div>
                     <!-- Codigo Auxiliar -->
-                    <button [disabled]="!formGroup!.valid" class="btn btn-outline-success" type="submit">Registrar Domicilio</button>
-                    <!--  -->
-                </form>
-                <div class="text-center my-5">
-                    <button class="btn btn-primary" [disabled]="idDomicile==0" (click)="endCollapsed = !endCollapsed" (click)="openModal(template)"
+                    <div class="text-center my-5">
+                    <button [disabled]="!formGroup!.valid" *ngIf="!registered" class="btn btn-outline-success" type="submit">Registrar Domicilio</button>
+                    <button class="btn btn-primary" *ngIf="registered" [disabled]="idDomicile==0" (click)="endCollapsed = !endCollapsed" (click)="openModal(template)"
                     [attr.aria-expanded]="!endCollapsed" aria-controls="collapseBasic">
                         Finalizar Compra
                     </button>   
                 </div>
+                    <!--  -->
+                </form>
             </div>
         <!-- Retiro en sucursal -->
         </div>
         
         <div id="collapseBasic" [collapse]="collapsed" [isAnimated]="true">
             <h2 class="text-center my-3" id="sucursal">Retiro en Sucursal</h2>
-            <div class="well well-lg card card-block card-header">
+            <div class="well well-lg card card-block card-header mb-5">
                 <form id="sucursales">
                     <label>
                         <input type="radio" name="sucursal" value="1">
@@ -76,13 +76,14 @@
                         <input type="radio" name="sucursal" value="4">
                         San Juan 800, Rosario
                     </label><br>
+                    <div class="text-center my-2">
+                        <button class="btn btn-primary" (click)="setSucursal(template)" 
+                        [attr.aria-expanded]="!endCollapsed" aria-controls="collapseBasic">
+                            Finalizar Compra
+                        </button>
+                    </div>
                 </form>
-                <div class="text-center my-2">
-                    <button class="btn btn-primary" (click)="setSucursal(template)" 
-                    [attr.aria-expanded]="!endCollapsed" aria-controls="collapseBasic">
-                        Finalizar Compra
-                    </button>
-                </div>
+               
             </div>
         </div>
     </div>
@@ -99,3 +100,7 @@
       <app-payment [cartSell]="cartSales" (objectCharge)="doSell($event)"></app-payment>
     </div>
   </ng-template> 
+
+
+
+  <app-footer></app-footer>
