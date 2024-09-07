@@ -66,6 +66,9 @@
             </tr>
           </tbody>
         </table>
+        <div  *ngIf="listProducts.length==0">
+            <p class="alert alert-info text-center">No hay productos en esta página</p>
+        </div>
         <nav aria-label="Page navigation example" *ngIf="totalPages.length>0">
           <ul class="pagination">
             <li class="page-item">

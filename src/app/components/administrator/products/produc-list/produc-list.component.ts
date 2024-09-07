@@ -73,12 +73,15 @@ export class ProducListComponent implements OnInit{
       this.active0='active';
       this.active1='';
       this.active2='';
+      this.disabledNext = 'disabled';
+      this.disabledBack = 'disabled';
     }, 500);
   }
 
 //dada una pagina
   getProductByPage(page:number){
     this.page=page
+    console.log(this.page)
     this.listProducts = [];
     this.productoS.getProductsByPage(page);
     this.productoS.getProductsByPageObs().subscribe((data:responseProductPaginate) => {
@@ -124,7 +127,7 @@ export class ProducListComponent implements OnInit{
         default:
           break;
       }
-    }, 500); 
+    }, 1500); 
     console.log(this.totalPages)   
   }
 

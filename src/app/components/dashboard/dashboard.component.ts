@@ -21,9 +21,12 @@ export class DashboardComponent implements OnInit {
   modalRef?:BsModalRef;
   page:number=0;
   totalPages:number[] = [];
-  disabledNext:boolean = false;
-  disabledBack: boolean=true;
+  disabledNext:string = '';
+  disabledBack:string = '';
   object!:responseProductPaginate;
+  active0:string='';
+  active1:string='';
+  active2:string='';
 
   constructor(private productService: ProductService,
     private modalService: BsModalService,
@@ -35,7 +38,6 @@ export class DashboardComponent implements OnInit {
       this.object = data  
     });
     this.getProductByPage(this.page);
-    this.disabledNext = false;
   }
 
   getProducts() {
@@ -52,7 +54,12 @@ export class DashboardComponent implements OnInit {
           this.listProducts.push(list[i]) //Agregar el producto con stock >0 al arreglo
         }
       }
-    }, 500);
+      this.active0='active';
+      this.active1='';
+      this.active2='';
+      this.disabledNext = 'disabled'
+      this.disabledBack='disabled';
+    }, 1500);
 
   }
 
@@ -79,8 +86,6 @@ export class DashboardComponent implements OnInit {
     
     setTimeout(() => {
       const {total, products} = this.object
-      this.disabledBack=false;
-      this.disabledNext=false;
       let pagesArray:number[] = [];
       let i;
       for(i=1; i< total/3; i++){
@@ -91,11 +96,19 @@ export class DashboardComponent implements OnInit {
         pagesArray.push(i)
       }
       this.totalPages = pagesArray
-      if(page == this.totalPages.length-1){
-        this.disabledNext = true
+      if(page == this.totalPages.length){
+        this.disabledNext = 'disabled'
+        this.disabledBack='';
+        this.active0='';
+        this.active1='';
+        this.active2='active';
       }
       if(page == 0){
-        this.disabledBack = true
+        this.disabledNext = ''
+        this.disabledBack='disabled';
+        this.active0='';
+        this.active1='active';
+        this.active2='';
       }
       for (let i = 0; i < products.length; i++) {
         if (products[i].stock > 0) {
@@ -103,7 +116,7 @@ export class DashboardComponent implements OnInit {
         }
        
       }
-    }, 500);
+    }, 1500);
    
     
   }
