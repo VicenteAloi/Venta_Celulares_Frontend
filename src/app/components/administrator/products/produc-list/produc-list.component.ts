@@ -102,10 +102,10 @@ export class ProducListComponent implements OnInit{
       this.disabledNext='';
       let pagesArray:number[] = [];
       let i;
-      for(i=1; i< total/3; i++){
+      for(i=1; i< total/8; i++){
         pagesArray.push(i);
       }
-      if(total%3 != 0){
+      if(total%8 != 0){
         pagesArray.push(i)
       }
       this.totalPages = pagesArray
@@ -118,7 +118,7 @@ export class ProducListComponent implements OnInit{
       }
       for (let i = 0; i < products.length; i++) {
 
-          this.listProducts.push(products[i]) //Agregar el producto con stock >0 al arreglo
+          this.listProducts.push(products[i])
         
       }
       switch (page) {

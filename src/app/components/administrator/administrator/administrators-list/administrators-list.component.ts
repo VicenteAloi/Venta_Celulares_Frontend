@@ -82,7 +82,7 @@ export class AdministratorsListComponent {
       const {total, administrators} = object
       let pagesArray:number[] = [];
       let i;
-      for(i=1; i< total/3; i++){
+      for(i=1; i< total/5; i++){
         pagesArray.push(i);
       }
       if(total%2 != 0){
@@ -90,7 +90,7 @@ export class AdministratorsListComponent {
       }
       this.totalPages = pagesArray
       for (let i = 0; i < administrators.length; i++) {
-          this.adminList.push(administrators[i]) //Agregar el producto con stock >0 al arreglo
+          this.adminList.push(administrators[i])
         }
         this.loading=false;
         this.disabled='';

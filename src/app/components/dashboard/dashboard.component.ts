@@ -97,7 +97,7 @@ export class DashboardComponent implements OnInit {
       const {total, products} = this.object
       let pagesArray:number[] = [];
       let i;
-      for(i=1; i< total/3; i++){
+      for(i=1; i< total/8; i++){
         pagesArray.push(i);
         
       }
@@ -121,7 +121,7 @@ export class DashboardComponent implements OnInit {
       }
       for (let i = 0; i < products.length; i++) {
         if (products[i].stock > 0) {
-          this.listProducts.push(products[i]) //Agregar el producto con stock >0 al arreglo
+          this.listProducts.push(products[i]) 
         }
        
       }
