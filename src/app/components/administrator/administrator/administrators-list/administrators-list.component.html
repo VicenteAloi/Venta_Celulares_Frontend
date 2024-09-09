@@ -60,7 +60,7 @@
         <nav aria-label="Page navigation example">
           <ul class="pagination">       
                 <li class="page-item {{active1}}" ><a class="page-link" (click)="getAdministrators(0)">1</a></li>
-                <li class="page-item {{active2}}" ><a class="page-link" (click)="getAdministrators(1)" *ngIf="this.totalPages.length>=1">2</a></li>
+                <li class="page-item {{active2}}" ><a class="page-link" (click)="getAdministrators(1)" *ngIf="this.totalPages.length>1">2</a></li>
                 <li class="page-item px-5 {{active0}}"><a class="page-link" (click)="getAllAdministrators()">Mostrar todos</a> </li>          
           </ul>
         </nav>

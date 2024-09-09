@@ -43,8 +43,8 @@
       </li>
   
         <li  class="page-item {{active1}}"><a class="page-link" (click)="getProductByPage(0)">1</a></li>
-        <li class="page-item {{active2}}"><a class="page-link" (click)="getProductByPage(1)" *ngIf="this.totalPages.length>=1">2</a></li>
-        <li class="page-item"><a class="page-link" (click)="getProductByPage(2)" *ngIf="this.totalPages.length>=2">3</a></li>
+        <li class="page-item {{active2}}"><a class="page-link" (click)="getProductByPage(1)" *ngIf="this.totalPages.length>1">2</a></li>
+        <li class="page-item"><a class="page-link" (click)="getProductByPage(2)" *ngIf="this.totalPages.length>2">3</a></li>
       <li class="page-item">
         <a class="page-link {{disabledNext}}" aria-label="Next">
           <span aria-hidden="true" (click)="getProductByPage(page+1)">>></span>
