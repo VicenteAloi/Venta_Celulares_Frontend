@@ -26,6 +26,10 @@ export class AdministratorsListComponent {
   active1:string ='';
   active2:string ='';
   active0:string='';
+  disabled:string='';
+  disabledBack:string='disabled';
+  disabledNext:string='';
+  loading:boolean=false;
 
   constructor(
     private adminService: AdministratorsService, 
@@ -59,13 +63,17 @@ export class AdministratorsListComponent {
   }
 
   findAdministrator() {
-    this.userService.getThisUserBehaviour().subscribe(value => this.user = value)
+    this.userService.getThisUserBehaviour().subscribe(value => {
+      this.user = value;
+  })
   }
 
 
 
   async getAdministrators(page:number){
     this.page=page
+    this.loading=true;
+    this.disabled='disabled';
     let object: responseAdminPaginate;
     this.adminList = [];
     this.adminService.getAdministrators(this.page)
@@ -84,35 +92,50 @@ export class AdministratorsListComponent {
       for (let i = 0; i < administrators.length; i++) {
           this.adminList.push(administrators[i]) //Agregar el producto con stock >0 al arreglo
         }
-    });
+        this.loading=false;
+        this.disabled='';
+
+      });
      switch (page) {
           case 0:
             this.active1 ='active';
             this.active2='';
             this.active0='';
+            this.disabledNext='';
+            this.disabledBack='disabled';
             break;
           case 1:
             this.active1 ='';
             this.active2='active';
             this.active0='';
+            this.disabledNext='disabled';
+            this.disabledBack='';
             break
           default:
             break;
         }
+        
    
   }
 
   getAllAdministrators(){
     this.page=-1;
+    this.loading=true;
+    this.disabled='disabled';
     this.adminService.retraiveAdministrator().subscribe({
       next:(data: user[]) => {
         this.adminList = data
+        this.loading=false;
+        this.disabled='';
+        this.disabledNext='disabled';
+        this.disabledBack='disabled';
       },
       error:(error)=> this.toastr.error(error)
     });
     this.active1 ='';
     this.active2='';
     this.active0='active';
+    
   }
 
 }

@@ -29,28 +29,29 @@
   </div>
 </div>
 
-<div class="alert alert-info text-center" style="width: auto;" *ngIf="listProducts.length==0">
-  <p>"No hay productos en esta pagina"</p> 
+
+<div class="text-center my-5" >
+  <app-spinner *ngIf="loading"></app-spinner> 
 </div>
+
 
 <div>
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item">
-        <a class="page-link {{disabledBack}}" aria-label="Previous" (click)="getProductByPage(page-1)">
+        <a class="page-link {{disabledBack}} {{disabled}}" aria-label="Previous" (click)="getProductByPage(page-1)">
           <span aria-hidden="true"><<</span>
         </a>
       </li>
-  
-        <li  class="page-item {{active1}}"><a class="page-link" (click)="getProductByPage(0)">1</a></li>
-        <li class="page-item {{active2}}"><a class="page-link" (click)="getProductByPage(1)">2</a></li>
-        <li class="page-item"><a class="page-link" (click)="getProductByPage(2)" *ngIf="this.totalPages.length>=2">3</a></li>
+        <li  class="page-item {{active1}} {{disabled}}"><a class="page-link" (click)="getProductByPage(0)">1</a></li>
+        <li class="page-item {{active2}} {{disabled}}"><a class="page-link" (click)="getProductByPage(1)" *ngIf="this.totalPages.length>1">2</a></li>
+        <li class="page-item"><a class="page-link" (click)="getProductByPage(2)" *ngIf="this.totalPages.length>2">3</a></li>
       <li class="page-item">
-        <a class="page-link {{disabledNext}}" aria-label="Next">
+        <a class="page-link {{disabledNext}} {{disabled}}" aria-label="Next">
           <span aria-hidden="true" (click)="getProductByPage(page+1)">>></span>
         </a>
       </li>
-      <li class="page-item px-5 {{active0}}"><a class="page-link" (click)="getProducts()">Todos</a> </li>
+      <li class="page-item px-5 {{active0}} {{disabled}} "><a class="page-link" (click)="getProducts()">Todos</a> </li>
     </ul>
   </nav>
 </div>

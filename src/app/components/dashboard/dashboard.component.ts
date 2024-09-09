@@ -23,17 +23,19 @@ export class DashboardComponent implements OnInit {
   totalPages:number[] = [];
   disabledNext:string = '';
   disabledBack:string = '';
+  disabled:string='';
   object!:responseProductPaginate;
   active0:string='';
   active1:string='';
   active2:string='';
+  loading: boolean = false;
 
   constructor(private productService: ProductService,
     private modalService: BsModalService,
     private router: Router) { }
 
   ngOnInit(): void {
-    
+    this.disabled='disabled'
     this.productService.getProductsByPageObs().subscribe((data) => {
       this.object = data  
     });
@@ -42,12 +44,15 @@ export class DashboardComponent implements OnInit {
 
   getProducts() {
     this.page=-1;
+    this.disabled='disabled'
     this.listProducts = [];
+    this.loading=true;
     let list: product[] = [];
     this.productService.retraiveProducts();
     this.productService.getProductsObs().subscribe((data: product[]) => {
       list = data;
     });
+
     setTimeout(() => {
       for (let i = 0; i < list.length; i++) {
         if (list[i].stock > 0) {
@@ -59,7 +64,10 @@ export class DashboardComponent implements OnInit {
       this.active2='';
       this.disabledNext = 'disabled'
       this.disabledBack='disabled';
+     this.disabled=''
+     this.loading=false;
     }, 1500);
+    
 
   }
 
@@ -80,7 +88,8 @@ export class DashboardComponent implements OnInit {
  
   async getProductByPage(page:number){
     this.page=page
-
+    this.disabled='disabled'
+    this.loading=true
     this.listProducts = [];
     this.productService.getProductsByPage(page);
     
@@ -116,6 +125,10 @@ export class DashboardComponent implements OnInit {
         }
        
       }
+      this.disabled=''
+      this.loading=false;
+      console.log(this.totalPages.length)
+
     }, 1500);
    
     

@@ -27,6 +27,8 @@ export class ProducListComponent implements OnInit{
   active1:string='';
   active2:string='';
   active0:string='';
+  disabled:string='';
+  loading:boolean=false;
 
   constructor(private productoS: ProductService, private modalService: BsModalService) { }
 
@@ -59,6 +61,8 @@ export class ProducListComponent implements OnInit{
   getProducts() {
     this.productoS.retraiveProducts();
     this.page=-1;
+    this.loading=true;
+    this.disabled='disabled'
     this.listProducts = [];
     let list: product[] = [];
     this.productoS.getProductsObs().subscribe((data: product[]) => {
@@ -75,13 +79,17 @@ export class ProducListComponent implements OnInit{
       this.active2='';
       this.disabledNext = 'disabled';
       this.disabledBack = 'disabled';
+      this.loading=false;
+      this.disabled=''
+
     }, 500);
   }
 
 //dada una pagina
   getProductByPage(page:number){
     this.page=page
-    console.log(this.page)
+    this.loading=true;
+    this.disabled='disabled'
     this.listProducts = [];
     this.productoS.getProductsByPage(page);
     this.productoS.getProductsByPageObs().subscribe((data:responseProductPaginate) => {
@@ -109,9 +117,9 @@ export class ProducListComponent implements OnInit{
         this.disabledBack = 'disabled'
       }
       for (let i = 0; i < products.length; i++) {
-        if (products[i].stock > 0) {
+
           this.listProducts.push(products[i]) //Agregar el producto con stock >0 al arreglo
-        }
+        
       }
       switch (page) {
         case 0:
@@ -127,6 +135,8 @@ export class ProducListComponent implements OnInit{
         default:
           break;
       }
+      this.loading=false;
+      this.disabled=''
     }, 1500); 
     console.log(this.totalPages)   
   }

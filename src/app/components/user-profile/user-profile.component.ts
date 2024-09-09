@@ -53,11 +53,9 @@ export class UserProfileComponent{
       } if ((this.newPassword != '' && this.newPassword2 != '')) {
         if (this.newPassword === this.newPassword2) {
           this.user.password = this.newPassword;
-
           this.customerService.updateCustomers(this.user.dni, this.user).subscribe({
             next: () => {
               this.toastr.success(`Contraseña modificada`);
-
               this.newPassword = '';
               this.newPassword2 = '';
               this.newEmail = '';

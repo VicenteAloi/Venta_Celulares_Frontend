@@ -1,6 +1,6 @@
-.ProductsSlides {
-  display: block;
-  margin: auto;
+
+
+.carousel-item img{
   width: 100%;
   height: 40rem;
 }
