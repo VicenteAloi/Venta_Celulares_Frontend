@@ -76,13 +76,8 @@
                 <span aria-hidden="true"><<</span>
               </a>
             </li>
-<<<<<<< HEAD
               <li class="page-item {{active1}} {{disabled}}"><a class="page-link" (click)="getProductByPage(0)">1</a></li>
               <li class="page-item {{active2}} {{disabled}}"><a class="page-link" (click)="getProductByPage(1)">2</a></li>
-=======
-              <li class="page-item {{active1}}"><a class="page-link" (click)="getProductByPage(0)">1</a></li>
-              <li class="page-item {{active2}}"><a class="page-link" (click)="getProductByPage(1)" *ngIf="this.totalPages.length>1">2</a></li>
->>>>>>> bfd033266f9e704ab47313e4217d7caee146ca89
             <li class="page-item">
               <a  class="page-link {{disabledNext}} {{disabled}}" aria-label="Next">
                 <span aria-hidden="true" (click)="getProductByPage(page+1)">>></span>
