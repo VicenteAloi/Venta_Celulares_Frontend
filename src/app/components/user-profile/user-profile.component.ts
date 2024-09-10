@@ -9,17 +9,27 @@ import { ErrorService } from 'src/app/services/error.service';
 import { UserService } from 'src/app/services/user.service';
 
 
+type userModified= {
+  email:string,
+  password:string
+}
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
+
 export class UserProfileComponent{
   showData: boolean = true;
   button: string = 'Mostrar';
   data: boolean = false;
   mail: boolean = false;
   user!: user;
+  userM:userModified={
+    email:'',
+    password:''
+  };
   newEmail: string = "";
   newPassword: string = "";
   newPassword2: string = "";
@@ -34,10 +44,10 @@ export class UserProfileComponent{
   userModifier() {
     if ((this.newPassword != '' && this.newPassword2 != '') || (this.newEmail != '')) {
       if (this.newEmail != "") {
-        this.user.email = this.newEmail;
-        this.customerService.updateCustomers(this.user.dni, this.user).subscribe({
+        this.userM.email=this.newEmail;
+        this.customerService.updateCustomers(this.user.dni, this.userM).subscribe({
           next: () => {
-            this.user.email = this.user.email;
+            this.user.email = this.userM.email;
             localStorage.setItem('user', JSON.stringify(this.user));
             this.toastr.success(`Mail Modificado a: ${this.user.email}`);
             this.newPassword = '';
@@ -52,8 +62,8 @@ export class UserProfileComponent{
 
       } if ((this.newPassword != '' && this.newPassword2 != '')) {
         if (this.newPassword === this.newPassword2) {
-          this.user.password = this.newPassword;
-          this.customerService.updateCustomers(this.user.dni, this.user).subscribe({
+          this.userM.password = this.newPassword;
+          this.customerService.updateCustomers(this.user.dni, this.userM).subscribe({
             next: () => {
               this.toastr.success(`Contraseña modificada`);
               this.newPassword = '';
