@@ -1,19 +1,15 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertComponent } from 'ngx-bootstrap/alert';
+import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { timeout } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 import { brand } from 'src/app/interfaces/brand';
 import { user } from 'src/app/interfaces/user';
 import { BrandsService } from 'src/app/services/brands.service';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 
-interface alert {
-  msg: string,
-  type:string,
-  timeout: number
-}
+
 
 @Component({
   selector: 'app-formulario-registro',
@@ -23,7 +19,6 @@ interface alert {
 export class FormularioRegistroComponent  {
   @Output() hideModal = new EventEmitter<boolean>();
   //PARTE DEL ALERT
-  alerts: alert[] = [];
   Admin!: user;
   //previalization card ngModal
   model:string="";
@@ -35,7 +30,7 @@ export class FormularioRegistroComponent  {
   brands:brand[] = []
   //FORMULARIO Y USO DE SERVICE
   productForm!: FormGroup;
-  constructor(private productoS: ProductService, public fb: FormBuilder, private userService: UserService, private brandsService:BrandsService,private modalService: BsModalService) {
+  constructor(private productoS: ProductService, public fb: FormBuilder, private userService: UserService, private brandsService:BrandsService,private modalService: BsModalService, private toastr: ToastrService, private router: Router) {
     this.initForm();
     this.userService.getThisUserBehaviour().subscribe((value) => this.Admin = value);
     this.brandsService.getBrands().subscribe((value)=> this.brands = value);
@@ -68,26 +63,19 @@ export class FormularioRegistroComponent  {
     next: () => {
         this.productoS.retraiveProducts();
          this.productoS.getProductsByPage(1);
-         this.alerts.push({
-           type: 'info',
-           msg: `Producto registrado correctamente (added: ${new Date().toLocaleTimeString()})`,
-           timeout: 3000
-         });
+         this.toastr.success(`Producto registrado correctamente (added: ${new Date().toLocaleTimeString()})`)
        },
        error: (error) => {
-         this.alerts.push({
-          msg: JSON.stringify(error),
-          type:'warning',
-          timeout: 3000
-        })
-       }
+        this.toastr.error(error)
+       },
+    complete: () => {
+      this.router.navigate(['/admin/products'])
+    }
      });
     this.initForm();
+
   }
   
-  onClosed(dismissedAlert: alert): void {
-    this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
-  }
 
   getNameBrand(idBrand:string){
     return this.brands.find((element)=> element.idBrand == Number(idBrand))?.name

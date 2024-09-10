@@ -127,8 +127,6 @@ export class DashboardComponent implements OnInit {
       }
       this.disabled=''
       this.loading=false;
-      console.log(this.totalPages.length)
-
     }, 1500);
    
     

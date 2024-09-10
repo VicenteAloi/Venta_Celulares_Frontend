@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { product } from 'src/app/interfaces/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -30,7 +31,7 @@ export class ProducListComponent implements OnInit{
   disabled:string='';
   loading:boolean=false;
 
-  constructor(private productoS: ProductService, private modalService: BsModalService) { }
+  constructor(private productoS: ProductService, private modalService: BsModalService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getProductByPage(this.page);
@@ -40,7 +41,7 @@ export class ProducListComponent implements OnInit{
     const produ = this.listProducts[indice];
     this.productoS.deleteProducto(produ).subscribe({
       next: () => { this.getProductByPage(this.page) },
-      error: (error) => console.log(error)
+      error: (error) => this.toastr.error(error)
     });
     this.modalRef?.hide()
 
@@ -97,7 +98,6 @@ export class ProducListComponent implements OnInit{
     });
     setTimeout(() => {
       const {total, products} = this.object
-      console.log(total, products)
       this.disabledBack='';
       this.disabledNext='';
       let pagesArray:number[] = [];
@@ -138,12 +138,10 @@ export class ProducListComponent implements OnInit{
       this.loading=false;
       this.disabled=''
     }, 1500); 
-    console.log(this.totalPages)   
   }
 
   sendPage(page:number){
     this.getProductByPage(page);
-    console.log(this.listProducts)
   }
 
   updateList(page:number){

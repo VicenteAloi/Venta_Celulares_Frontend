@@ -33,9 +33,7 @@
       <button [disabled]="!productForm.valid" class="btn btn-success">Registrar</button>
     </form>
   
-    <div *ngFor="let alert of alerts">
-      <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{ alert.msg }}</alert>
-    </div>
+    
   </div> 
   <div class="demo">
     <h5 class="text-demo">Previsualización</h5>

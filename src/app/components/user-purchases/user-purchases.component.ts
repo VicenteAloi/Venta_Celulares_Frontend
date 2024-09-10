@@ -24,14 +24,12 @@ export class UserPurchasesComponent implements OnInit {
     private modalService: BsModalService, private rutaActiva: ActivatedRoute) {
 
     this.idUser = this.rutaActiva.snapshot.params['idUser'];
-    console.log(this.idUser)
   }
 
   ngOnInit(): void {
     this.customerService.getSalesUser(this.idUser).subscribe((data) => {
       this.listOfSales = data
     })
-    console.log(this.listOfSales)
   }
 
   productInfo(template: TemplateRef<any>) {

@@ -28,7 +28,6 @@ export class PanelAdministradorComponent implements OnInit {
     } else {
       if (!this.admin.isAdmin) {
         this.router.navigate(['/dashboard']);
-        console.log(this.admin)
         return this.toastr.error('Acceso Denegado');
       } else {
         return true

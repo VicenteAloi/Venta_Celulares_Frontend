@@ -41,7 +41,6 @@ export class AdministratorsListComponent {
 
   ngOnInit(): void {
    this.getAdministrators(this.page);
-   console.log(this.totalPages);
   }
   openModal2(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);

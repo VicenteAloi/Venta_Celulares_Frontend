@@ -39,7 +39,6 @@ export class SignInComponent {
   }
 
   onSubmit(passwordConfirm:HTMLInputElement){
-    console.log(this.userForm)
     if (this.userForm.value.password != passwordConfirm.value) {
       this.toastr.error('Las Password Ingresadas son Distintas', 'Error');
       return;

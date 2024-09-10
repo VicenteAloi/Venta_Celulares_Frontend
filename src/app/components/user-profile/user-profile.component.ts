@@ -48,7 +48,6 @@ export class UserProfileComponent{
         this.customerService.updateCustomers(this.user.dni, this.userM).subscribe({
           next: () => {
             this.user.email = this.userM.email;
-            localStorage.setItem('user', JSON.stringify(this.user));
             this.toastr.success(`Mail Modificado a: ${this.user.email}`);
             this.newPassword = '';
             this.newPassword2 = '';

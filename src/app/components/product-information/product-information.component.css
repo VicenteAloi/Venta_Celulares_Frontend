@@ -16,6 +16,7 @@ h2 {
 
 .container{
   text-align: center;
+  min-height: 70%;
 }
 
 .card {

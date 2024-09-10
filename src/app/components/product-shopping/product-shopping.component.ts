@@ -47,7 +47,6 @@ export class ProductShoppingComponent implements OnInit {
     this.productService.getProductsObs().subscribe((value) => {
       this.listOfProducts = value
       let index = this.listOfProducts.findIndex((product) => product.id == this.product.id)
-      console.log(index)
       this.newProduct = this.listOfProducts[index];
       this.stock = this.newProduct?.stock;
     })
